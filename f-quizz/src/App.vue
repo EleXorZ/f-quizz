@@ -1,15 +1,11 @@
 <template>
-  <div id="app">
-    <TestApi />
-  </div>
+  <v-app>
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
-<script>
-import TestApi from './components/TestApi';
-
-export default {
-  components: {
-    TestApi,
-  },
-};
+<script lang="ts" setup>
+  //
 </script>
