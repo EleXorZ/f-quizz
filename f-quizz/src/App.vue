@@ -1,15 +1,18 @@
 <template>
-  <div id="app">
-    <TestApi />
-  </div>
+  <router-view></router-view>
 </template>
 
 <script>
-import TestApi from './components/TestApi';
 
 export default {
   components: {
-    TestApi,
   },
 };
 </script>
+
+<style>
+router-view {
+  display: block;
+  margin-top: 20px;
+}
+</style>
