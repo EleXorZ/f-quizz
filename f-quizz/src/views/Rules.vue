@@ -39,12 +39,12 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   padding-bottom: 20px;
 }
 
 .header {
   background-color: #5DA5B3;
+  box-sizing: border-box;
   clip-path: polygon(0 0, 0 calc(100% - 70px), 50% 100%, 100% calc(100% - 70px), 100% 0);
   display: flex;
   align-items: center;
