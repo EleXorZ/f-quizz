@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <header class="header">
-      <button class="home-button" @click="$router.push('/')">🏠</button>
+      <button class="home-button" @click="$router.push('/')">🏠︎</button>
       <h1 class="title">Sélectionnez une semaine</h1>
     </header>
 
@@ -137,7 +137,6 @@ export default {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 30px;
   border-radius: 15px;
   max-width: 600px;
   color: white;

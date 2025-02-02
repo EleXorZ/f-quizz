@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <header class="header">
+      <button class="home-button" @click="$router.push('/')">🏠︎</button>
       <h1 class="title">Crédits</h1>
     </header>
 
@@ -46,6 +47,27 @@ export default {
   color: white;
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.home-button {
+  position: absolute;
+  left: 15px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+}
+
+@media (max-width: 600px) {
+  .home-button {
+    display: none;
+  }
+}
+
+.home-button:hover {
+  opacity: 0.7;
 }
 
 .credits {
