@@ -106,14 +106,18 @@ export default {
 .home-button {
   position: absolute;
   left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
   background: none;
   border: none;
   font-size: 1.8rem;
   color: white;
   cursor: pointer;
   transition: opacity 0.3s ease-in-out;
+}
+
+@media (max-width: 600px) {
+  .home-button {
+    display: none;
+  }
 }
 
 .home-button:hover {
@@ -126,16 +130,6 @@ export default {
   color: white;
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-@media (max-width: 600px) {
-  .home-button {
-    left: 10px;
-    font-size: 1.5rem;
-  }
-  .title {
-    font-size: 2rem;
-  }
 }
 
 .content {
