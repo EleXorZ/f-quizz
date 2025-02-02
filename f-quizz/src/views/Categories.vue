@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <header class="header">
-      <button class="back-button" @click="$router.go(-1)">⬅ Retour</button>
+      <button class="home-button" @click="$router.push('/')">🏠</button>
       <h1 class="title">Sélectionnez une semaine</h1>
     </header>
 
@@ -68,10 +68,10 @@ export default {
       });
     },
     isLocked(unlockDate) {
-      return unlockDate && !(unlockDate < this.todayDate);
+      return unlockDate && !(unlockDate <= this.todayDate);
     },
     formatDate(date) {
-      const options = {day: "2-digit", month: "long", year: "numeric"};
+      const options = { day: "2-digit", month: "long", year: "numeric" };
       return new Date(date).toLocaleDateString("fr-FR", options);
     },
   },
@@ -88,51 +88,65 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 20px;
 }
 
 .header {
   background-color: #5DA5B3;
+  box-sizing: border-box;
   clip-path: polygon(0 0, 0 calc(100% - 70px), 50% 100%, 100% calc(100% - 70px), 100% 0);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 75px 20px;
-  width: 100%;
   position: relative;
+  width: 100%;
 }
 
-.back-button {
+.home-button {
   position: absolute;
-  left: 20px;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
   background: none;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   color: white;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  padding: 5px 10px;
   transition: opacity 0.3s ease-in-out;
 }
 
-.back-button:hover {
+.home-button:hover {
   opacity: 0.7;
 }
 
 .title {
   font-family: 'DynaPuff', cursive;
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: white;
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 600px) {
+  .home-button {
+    left: 10px;
+    font-size: 1.5rem;
+  }
+  .title {
+    font-size: 2rem;
+  }
 }
 
 .content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
   width: 100%;
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 600px;
+  color: white;
 }
 
 .loading,
