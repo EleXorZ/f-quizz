@@ -1,76 +1,71 @@
 <template>
-  <div>
-    <h1>Quiz : {{ categoryName }}</h1>
-    <h2 v-if="loading">Chargement des questions...</h2>
-    <div v-if="error" class="error">{{ error }}</div>
+  <div class="quiz-container">
+    <header class="header">
+      <button class="home-button" @click="$router.push('/')">🏠︎</button>
+      <h1 class="title">Quiz : {{ categoryName }}</h1>
+    </header>
 
-    <!-- Barre de progression -->
-    <div class="progress-bar-container">
-      <div class="progress-bar" :style="{ width: progressPercentage + '%' }"></div>
-    </div>
+    <div class="content">
+      <div v-if="loading" class="loading">Chargement des questions...</div>
+      <div v-if="error" class="error">{{ error }}</div>
 
-    <!-- Affichage de la question -->
-    <div v-if="!loading && !isQuizFinished">
-      <h2>{{ currentQuestion.text }}</h2>
-
-      <!-- Liste des réponses -->
-      <ul>
-        <li
-            v-for="(answer) in currentQuestion.answers"
-            :key="answer.id"
-            :class="{
-              selected: selectedAnswer?.id === answer.id,
-              correct: showFeedback && answer.correct,
-              incorrect: showFeedback && selectedAnswer?.id === answer.id && !answer.correct,
-            }"
-            @click="selectAnswer(answer)"
-        >
-          {{ answer.text }}
-        </li>
-      </ul>
-
-
-      <!-- Bouton Valider -->
-      <button
-          :disabled="selectedAnswer === null"
-          v-if="!showFeedback"
-          @click="validateAnswer"
-      >
-        Valider
-      </button>
-
-      <!-- Feedback et actions après validation -->
-      <div v-if="showFeedback">
-        <p v-if="selectedAnswer && selectedAnswer.correct">
-          🎉 Bonne réponse !
-        </p>
-        <p v-else>
-          ❌ Mauvaise réponse. La bonne réponse est
-          <strong>{{ getCorrectAnswerText(currentQuestion) }}</strong>.
-        </p>
-
-        <!-- Bouton Explication -->
-        <button @click="openExplanation">Explication</button>
-
-        <!-- Bouton Question suivante ou Terminer -->
-        <button v-if="!isLastQuestion" @click="nextQuestion">Question suivante</button>
-        <button v-else @click="finishQuiz">Terminer</button>
+      <div class="progress-bar-container">
+        <div class="progress-bar" :style="{ width: progressPercentage + '%' }"></div>
       </div>
-    </div>
 
-    <!-- Résultat final -->
-    <div v-else>
-      <h2>Quiz terminé 🎉</h2>
-      <p>Vous avez obtenu un score de {{ score }} / {{ questions.length }}.</p>
-      <button @click="quitQuiz">Quitter</button>
-    </div>
+      <div v-if="!loading && !isQuizFinished">
+        <h2 class="question-text">{{ currentQuestion.text }}</h2>
 
-    <!-- Popup Explication -->
-    <div v-if="showExplanationPopup" class="popup">
-      <div class="popup-content">
-        <h3>Explication</h3>
-        <p>{{ currentQuestion.description }}</p>
-        <button @click="closeExplanation">Fermer</button>
+        <ul class="answers-list">
+          <li
+              v-for="(answer) in currentQuestion.answers"
+              :key="answer.id"
+              :class="{
+                selected: selectedAnswer?.id === answer.id,
+                correct: showFeedback && answer.correct,
+                incorrect: showFeedback && selectedAnswer?.id === answer.id && !answer.correct,
+              }"
+              @click="selectAnswer(answer)"
+          >
+            {{ answer.text }}
+          </li>
+        </ul>
+
+        <button
+            class="validate-button"
+            :disabled="selectedAnswer === null"
+            v-if="!showFeedback"
+            @click="validateAnswer"
+        >
+          Valider
+        </button>
+
+        <div v-if="showFeedback" class="feedback-section">
+          <p v-if="selectedAnswer && selectedAnswer.correct" class="correct-text">
+            🎉 Bonne réponse !
+          </p>
+          <p v-else class="incorrect-text">
+            ❌ Mauvaise réponse. La bonne réponse est <strong>{{ getCorrectAnswerText(currentQuestion) }}</strong>.
+          </p>
+
+          <button class="explanation-button" @click="openExplanation">Explication</button>
+          <button v-if="!isLastQuestion" class="next-button" @click="nextQuestion">Question suivante</button>
+          <button v-else class="finish-button" @click="finishQuiz">Terminer</button>
+        </div>
+      </div>
+
+      <div v-if="isQuizFinished" class="result-section">
+        <h2>Quiz terminé 🎉</h2>
+        <p>Vous avez obtenu un score de <strong>{{ score }} / {{ questions.length }}</strong>.</p>
+        <button class="quit-button" @click="quitQuiz">Quitter</button>
+      </div>
+
+      <div v-if="showExplanationPopup" class="popup">
+        <div class="popup-content">
+          <h3>Explication</h3>
+          <p>{{ currentQuestion.description }}</p>
+          <button class="close-popup-button" @click="closeExplanation">Fermer</button>
+        </div>
       </div>
     </div>
   </div>
@@ -149,12 +144,9 @@ export default {
       }
     },
     validateAnswer() {
-      // Vérifier si une réponse a été sélectionnée
       if (this.selectedAnswer) {
-        // Chercher la réponse correcte dans le tableau 'answers'
         const correctAnswer = this.currentQuestion.answers.find(answer => answer.correct);
 
-        // Comparer l'ID de la réponse sélectionnée avec l'ID de la bonne réponse
         if (this.selectedAnswer.id === correctAnswer.id) {
           this.score++;
         }
@@ -230,85 +222,193 @@ export default {
 };
 </script>
 
+<style scoped>
+.quiz-container {
+  background-color: #2E414D;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+}
 
-<style>
-.progress-bar-container {
+.header {
+  background-color: #5DA5B3;
+  box-sizing: border-box;
+  clip-path: polygon(0 0, 0 calc(100% - 70px), 50% 100%, 100% calc(100% - 70px), 100% 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 75px 20px;
+  position: relative;
   width: 100%;
-  background-color: #e0e0e0;
-  border-radius: 10px;
+}
+
+.home-button {
+  position: absolute;
+  left: 15px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+}
+
+@media (max-width: 600px) {
+  .home-button {
+    display: none;
+  }
+}
+
+.home-button:hover {
+  opacity: 0.7;
+}
+
+.title {
+  font-family: 'DynaPuff', cursive;
+  font-size: 3rem;
+  color: white;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  color: white;
+}
+
+.loading, .error {
+  font-size: 1.2rem;
+  color: white;
+  margin: 20px;
+}
+
+.error {
+  color: red;
+}
+
+.progress-bar-container {
+  width: 80%;
+  height: 10px;
+  background: #555;
+  border-radius: 5px;
+  margin: 20px 0;
   overflow: hidden;
-  margin-bottom: 20px;
-  height: 20px;
 }
 
 .progress-bar {
   height: 100%;
-  background-color: #4caf50;
-  transition: width 0.3s ease-in-out;
+  background: linear-gradient(90deg, #5da5b3, #0072ce);
+  transition: width 0.5s ease-in-out;
 }
 
-/* Styles des réponses */
-li {
+.question-text {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.answers-list {
   list-style: none;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 0;
+  width: 100%;
+}
+
+.answers-list li {
+  background: #5da5b3;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 10px 0;
+  text-align: center;
   cursor: pointer;
-  margin-bottom: 5px;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease-in-out;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-li.selected {
-  background-color: #f0f0f0;
+.answers-list li:hover {
+  background: #6dc6d1;
+  transform: scale(1.05);
 }
 
-li.correct {
-  background-color: #4caf50;
+.answers-list .selected {
+  background: #0072ce;
+}
+
+.answers-list .correct {
+  background: #4caf50;
+}
+
+.answers-list .incorrect {
+  background: #d32f2f;
+}
+
+.validate-button, .next-button, .finish-button, .quit-button, .explanation-button, .close-popup-button {
+  background: linear-gradient(135deg, #5da5b3, #0072ce);
   color: white;
-}
-
-li.incorrect {
-  background-color: #f44336;
-  color: white;
-}
-
-button {
-  margin: 10px 5px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
+  font-size: 1.2rem;
+  padding: 12px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease-in-out;
+  margin-top: 15px;
 }
 
-button:disabled {
-  background-color: #ccc;
+.explanation-button, .next-button, .finish-button {
+  width: 100%;
+  max-width: 200px;
+}
+
+.validate-button, .explanation-button, .next-button, .finish-button, .quit-button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.validate-button:disabled {
+  background: #aaa;
   cursor: not-allowed;
 }
 
-/* Styles pour la popup */
+.feedback-section {
+  text-align: center;
+}
+
+.correct-text {
+  color: #4caf50;
+}
+
+.incorrect-text {
+  color: #d32f2f;
+}
+
 .popup {
   position: fixed;
-  top: 0;
-  left: 0;
+  background: rgba(0, 0, 0, 0.7);
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  left: 0;
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 1000;
+  justify-content: center;
 }
 
 .popup-content {
-  background-color: white;
+  background: white;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   text-align: center;
-  width: 90%;
-  max-width: 400px;
+  color: black;
+}
+
+.close-popup-button {
+  background: #d32f2f;
 }
 </style>
