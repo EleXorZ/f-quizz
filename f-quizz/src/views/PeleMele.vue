@@ -133,6 +133,8 @@ h1 {
   font-weight: bold;
   color: white;
   margin-bottom: 15px;
+  text-align: center;
+  width: 100%;
 }
 
 .input {
