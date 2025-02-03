@@ -155,9 +155,10 @@ export default {
 
 .categories-list {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   gap: 15px;
+  width: 100%;
   max-width: 600px;
   margin-top: 20px;
 }
@@ -173,6 +174,14 @@ export default {
   transition: all 0.3s ease-in-out;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+@media (max-width: 600px) {
+  .category-button {
+    max-width: 90%;
+  }
 }
 
 .category-button:hover {
