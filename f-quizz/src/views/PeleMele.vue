@@ -65,6 +65,9 @@ export default {
         this.error = `Vous ne pouvez pas demander plus de ${this.numberAllQuestion} questions.`;
         return;
       }
+      apiClient.post('/clicks', null, {
+        params: { text: 'Start Pele Mele' }
+      });
       this.$router.push({
         name: "RandomQuiz",
         params: {numberOfQuestions: this.numberOfQuestions},

@@ -62,6 +62,9 @@ export default {
       }
     },
     startQuiz(categoryId, categoryName) {
+      apiClient.post('/clicks', null, {
+        params: { text: categoryName }
+      });
       this.$router.push({
         name: "Quiz",
         params: { categoryId, categoryName },

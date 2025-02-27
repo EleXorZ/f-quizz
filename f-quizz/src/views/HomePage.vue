@@ -19,13 +19,21 @@
 </template>
 
 <script>
+import apiClient from "@/api";
+
 export default {
   name: "HomePage",
   methods: {
     goToCategories() {
+      apiClient.post('/clicks', null, {
+        params: { text: 'Démarrer une partie' }
+      });
       this.$router.push({name: "Categories"});
     },
     startPeleMele() {
+      apiClient.post('/clicks', null, {
+        params: { text: 'Pele Mele' }
+      });
       this.$router.push({name: "PeleMele"});
     },
   },
