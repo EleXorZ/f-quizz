@@ -8,11 +8,11 @@
     <div class="rules-container">
       <p class="intro">Bienvenue dans <strong>UEL Quiz</strong> ! Voici comment jouer :</p>
       <ul class="rules-list">
-        <li>📝 Choisissez une catégorie ou le mode pêle-mêle.</li>
-        <li>⏳ Répondez aux questions.</li>
+        <li>📝 Choisissez une catégorie ou le mode pêle-mêle</li>
+        <li>⏳ Répondez aux questions</li>
         <li>🏆 Chaque bonne réponse vous rapporte un point !</li>
       </ul>
-      <p class="good-luck">Bonne chance et amusez-vous bien ! 🎉</p>
+      <p class="good-luck">Bonne chance ! 🎉</p>
     </div>
 
     <button class="start-btn" @click="goToCategories">Commencer</button>

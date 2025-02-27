@@ -6,7 +6,15 @@
     </header>
 
     <div class="credits">
-      <p class="dev-name">Cette application a été développée par <strong>Dilys Kevin</strong>.</p>
+      <p>Cette application a été développée par <strong>Kévin Dilys</strong>.</p>
+      <p>Application créée dans le cadre de l'UEL Engagement Pédagogique par : </p>
+      <ul>
+        <li>Charbel Ged</li>
+        <li>Ghita Elhejjam</li>
+        <li>Inès Boucher</li>
+        <li>Ouardia Haddad</li>
+        <li>Walter Strouk</li>
+      </ul>
     </div>
   </div>
 </template>

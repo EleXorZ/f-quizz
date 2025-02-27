@@ -48,7 +48,7 @@
             ❌ Mauvaise réponse. La bonne réponse est <strong>{{ getCorrectAnswerText(currentQuestion) }}</strong>.
           </p>
 
-          <button class="explanation-button" @click="openExplanation">Explication</button>
+          <button class="explanation-button" @click="openExplanation">Explications</button>
           <button v-if="!isLastQuestion" class="next-button" @click="nextQuestion">Question suivante</button>
           <button v-else class="finish-button" @click="finishQuiz">Terminer</button>
         </div>
@@ -62,7 +62,7 @@
 
       <div v-if="showExplanationPopup" class="popup">
         <div class="popup-content">
-          <h3>Explication</h3>
+          <h3>Explications</h3>
           <p>{{ currentQuestion.description }}</p>
           <button class="close-popup-button" @click="closeExplanation">Fermer</button>
         </div>
