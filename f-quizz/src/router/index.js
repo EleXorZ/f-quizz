@@ -6,6 +6,7 @@ import Credits from "@/views/Credits.vue";
 import Categories from "@/views/Categories.vue";
 import Quiz from "@/views/Quiz.vue";
 import PeleMele from "@/views/PeleMele.vue";
+import Stats from "@/views/Stats.vue";
 
 const routes = [
     { path: "/", name: "Home", component: HomePage },
@@ -15,6 +16,7 @@ const routes = [
     { path: "/quiz/:categoryId/:categoryName", name: "Quiz", component: Quiz},
     { path: "/pele-mele/:numberOfQuestions", name: "RandomQuiz", component: Quiz},
     { path: "/pele-mele", name: "PeleMele", component: PeleMele},
+    { path: "/stats", name: "Stats", component: Stats},
 ];
 
 const router = createRouter({
